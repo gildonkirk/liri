@@ -38,6 +38,12 @@ if(command === 'my-tweets'){
 
 	    // Artist Name
 	    console.log(songData.album.artists[0].name);
+	    // Song Name
+	    console.log(songData.name);
+	    // spotify link
+	    console.log(songData.external_urls.spotify);
+	    // album name
+	    console.log(songData.album.name);
 	});
 }
 
