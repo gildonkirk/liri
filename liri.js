@@ -19,6 +19,9 @@ var spotify = new Spotify({
 });
 
 var songData = '';
+var movieName = '';
+var queryUrl = '';
+
 if(command === 'my-tweets'){
 	params = {screen_name: 'donjohnsonvice'};
 	client.get('statuses/user_timeline', params, function(error, tweets, response) {
@@ -45,5 +48,20 @@ if(command === 'my-tweets'){
 	    // album name
 	    console.log(songData.album.name);
 	});
-}
+} else if (command === 'movie-this') {
+	for (i = 3; i < process.argv.length; i++) {
+		if (i !== process.argv.length-1){
+			movieName += process.argv[i] + '+';
+		} else {
+			movieName += process.argv[i]
+		}		
+	};
+	queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=40e9cece";
+	console.log(queryUrl);
+	request(queryUrl, function(error, response, body) {
+		if (!error && response.statusCode === 200){
+			console.log(JSON.parse(body));
+		}
+	});
+};
 
