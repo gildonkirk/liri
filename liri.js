@@ -9,14 +9,12 @@ var client = new Twitter({
   access_token_secret: keys.twitterKeys.access_token_secret
 });
 
-console.log(client.options.consumer_key);
-console.log(client.options.consumer_secret);
-console.log(client.options.access_token_key);
-console.log(client.options.access_token_secret);
+var params = {screen_name: 'donjohnsonvice'};
+client.get('statuses/user_timeline', params, function(error, tweets, response) {
+	if (!error && process.argv[2] === 'my-tweets') {
+		for(i = 0; i < tweets.length; i++){
+			console.log(tweets[i].text);
+		}   
+	}
+});
 
-// var params = {screen_name: 'nodejs'};
-// client.get('statuses/user_timeline', params, function(error, tweets, response) {
-// 	if (!error) {
-// 	console.log(tweets);
-// 	}
-// });
